@@ -24,7 +24,7 @@ if __name__ == "__main__":
     current_dir = os.getcwd()
     src_dir = os.path.join(current_dir, "src")
     os.chdir(src_dir)
-    compile_command = "javac DessertShop.java Order.java"
+    compile_command = "javac Main.java"
     compile_result = run_job(compile_command)
     if compile_result:
         print(f"Compilation error:\n{compile_result}")
