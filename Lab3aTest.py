@@ -19,14 +19,14 @@ def remove_class_files():
 
 if __name__ == "__main__":
     # Compile
-    src_dir = os.getcwd()  # Assuming you are in the directory containing Main.java
-    compile_command = "javac src/Main.java"
+    src_dir = 'src'  # Directory containing Main.java
+    compile_command = f"javac {src_dir}/Main.java"
     compile_result = run_job(compile_command)
     if compile_result:
         print(f"Compilation error:\n{compile_result}")
     else:
         input_data = "41\n"  # Providing the input as 41
-        run_command = "java -cp . Main"  # Running the Main class
+        run_command = f"java -cp {src_dir} Main"  # Running the Main class
         run_result = run_job(run_command, input_data=input_data)
         expected_output = "A customer with a chest measurement of 41 inches needs to order a size L.\n"
         if run_result.strip() == expected_output.strip():
