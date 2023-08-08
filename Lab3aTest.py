@@ -20,7 +20,7 @@ def remove_class_files():
 if __name__ == "__main__":
     # Compile
     src_dir = os.getcwd()  # Assuming you are in the directory containing Main.java
-    compile_command = "javac Main.java"
+    compile_command = "javac src/Main.java"
     compile_result = run_job(compile_command)
     if compile_result:
         print(f"Compilation error:\n{compile_result}")
