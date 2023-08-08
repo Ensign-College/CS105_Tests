@@ -33,7 +33,11 @@ if __name__ == "__main__":
         if expected_output.strip() in run_result.strip():
             print("Your code works")
         else:
-            print(f"Unexpected output:\n{run_result}")
-
+            print("Please! Make sure that your program output matched the example output")
+            print("Example output:")
+            print(expected_output)
+            print("Actual output:")
+            print({run_result})
+            exit(1)
     # Remove .class files
     remove_class_files()
