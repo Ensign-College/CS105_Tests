@@ -3,27 +3,30 @@ import subprocess
 
 
 def run_job(cmd, inputs):
-    process = subprocess.Popen(
-        cmd,
-        shell=True,
-        stdin=subprocess.PIPE,
-        stdout=subprocess.PIPE,
-        stderr=subprocess.STDOUT,
-        text=True,
-    )
+    try:
+        process = subprocess.Popen(
+            cmd,
+            shell=True,
+            stdin=subprocess.PIPE,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.STDOUT,
+            text=True,
+        )
 
-    output = ""
-    for input_line in inputs:
-        line = process.stdout.readline().strip()
-        output += line + "\n"
-        process.stdin.write(input_line + "\n")
-        process.stdin.flush()
+        output = ""
+        for input_line in inputs:
+            line = process.stdout.readline().strip()
+            output += line + "\n"
+            process.stdin.write(input_line + "\n")
+            process.stdin.flush()
 
-    # Read the remaining output
-    remaining_output = process.stdout.read()
-    output += remaining_output
+        # Read the remaining output
+        remaining_output = process.stdout.read()
+        output += remaining_output
 
-    return output
+        return output
+    except BrokenPipeError:
+     print("\033[91m" + "The program can not be run, or does not intake inputs" + "\033[0m")  # Red color
 
 
 def remove_class_files():
@@ -76,6 +79,11 @@ else:
     print(expected_output)
     print("Actual output:")
     print(run_result)
+    print("\nDifferences:")
+    for expected, actual in zip(expected_output_no_spaces, run_result_no_spaces):
+        if expected != actual:
+            print("\033[91m" + "Expected: " + expected + "\033[0m") # Red color
+            print("\033[91m" + "Actual: " + actual + "\033[0m") # Red color
     exit(1)
 
     # Remove .class files

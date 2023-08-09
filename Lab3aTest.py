@@ -2,15 +2,18 @@ import os
 import subprocess
 
 def run_job(cmd, input_data=None):
-    ret = subprocess.run(
-        cmd,
-        shell=True,
-        stdout=subprocess.PIPE,
-        stderr=subprocess.STDOUT,
-        input=input_data,
-        text=True,
-    )
-    return ret.stdout
+    try:
+        ret = subprocess.run(
+            cmd,
+            shell=True,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.STDOUT,
+            input=input_data,
+            text=True,
+        )
+        return ret.stdout
+    except BrokenPipeError:
+        print("\033[91m" + "Make sure the app runs correctly" + "\033[0m")
 
 def remove_class_files():
     for file in os.listdir('.'):
@@ -38,6 +41,11 @@ if __name__ == "__main__":
             print(expected_output)
             print("Actual output:")
             print({run_result})
+            print("\nDifferences:")
+            for expected, actual in zip(expected_output, run_result):
+                if expected != actual:
+                    print("\033[91m" + "Expected: " + expected + "\033[0m")  # Red color
+                    print("\033[91m" + "Actual: " + actual + "\033[0m")  # Red color
             exit(1)
     # Remove .class files
     remove_class_files()
