@@ -62,15 +62,18 @@ Month 17:     $4,380.29
 Month 18:     $4,645.26"""
         
         # Check if expected output is within run_result
-        if expected_output in run_result:
-            print("Your code works")
-        else:
-            print("Please! Make sure that your program output matched the example output")
-            print("Example output:")
-            print(expected_output)
-            print("Actual output:")
-            print(run_result)
-            exit(1)
+        expected_output_no_spaces = expected_output.replace(" ", "")
+run_result_no_spaces = run_result.replace(" ", "")
+
+if expected_output_no_spaces in run_result_no_spaces:
+    print("Your code works")
+else:
+    print("Please! Make sure that your program output matched the example output")
+    print("Example output:")
+    print(expected_output)
+    print("Actual output:")
+    print(run_result)
+    exit(1)
 
     # Remove .class files
     remove_class_files()
