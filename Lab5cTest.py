@@ -23,7 +23,7 @@ if __name__ == "__main__":
         print(f"Compilation error:\n{compile_result}")
     else:
         # Providing inputs in the sequence specified
-        input_data = "three\n3\n9\n2\n"
+        input_data = "three\n3\n9\n2\nn\n"
         run_command = f"java -cp {src_dir} Main"  # Running the Lab5c class
         run_result = run_job(run_command, input_data=input_data)
 
