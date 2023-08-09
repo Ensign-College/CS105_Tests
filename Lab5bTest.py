@@ -1,6 +1,7 @@
 import os
 import subprocess
 
+
 def run_job(cmd, inputs):
     process = subprocess.Popen(
         cmd,
@@ -10,7 +11,7 @@ def run_job(cmd, inputs):
         stderr=subprocess.STDOUT,
         text=True,
     )
-    
+
     output = ""
     for input_line in inputs:
         line = process.stdout.readline().strip()
@@ -24,10 +25,12 @@ def run_job(cmd, inputs):
 
     return output
 
+
 def remove_class_files():
     for file in os.listdir('.'):
         if file.endswith('.class'):
             os.remove(file)
+
 
 if __name__ == "__main__":
     # Compile
@@ -37,10 +40,10 @@ if __name__ == "__main__":
     if compile_result:
         print(f"Compilation error:\n{compile_result}")
     else:
-        input_data = ["a lot!", "250.50", "3.75", "18", "n"] # Inputs for the Java program
+        input_data = ["a lot!", "250.50", "3.75", "18", "n"]  # Inputs for the Java program
         run_command = f"java -cp {src_dir} Main"  # Running the Main class
         run_result = run_job(run_command, input_data)
-        
+
         expected_output = """Month              Balance
 Month 1:         $251.28
 Month 2:         $503.35
@@ -60,7 +63,7 @@ Month 15:     $3,852.82
 Month 16:     $4,116.14
 Month 17:     $4,380.29
 Month 18:     $4,645.26"""
-        
+
         # Check if expected output is within run_result
         expected_output_no_spaces = expected_output.replace(" ", "")
 run_result_no_spaces = run_result.replace(" ", "")
