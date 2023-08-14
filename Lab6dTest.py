@@ -28,21 +28,15 @@ if __name__ == "__main__":
         print(f"Compilation error:\n{compile_result}")
     else:
         input_data = [
-            "50", "16", "189", "y", "40", "42", "45", "n",
+            "I hope they call me on a Mission!", "n",
         ]  # Inputs for the Java program
         run_command = f"java -cp {src_dir} Main"
         run_result = run_job(run_command, input_data)
 
-        expected_output = """This program will ask the user for 3 numbers and determine if the second number lies between the first and the third.
-Please enter the low number: 50
-Please enter the number to be tested (the between number): 16
-Please enter the high number: 189
-16 DOES NOT lie between the numbers 50 and 189.
-Would you like to play again? (Y/N): y
-Please enter the low number: 40
-Please enter the number to be tested (the between number): 42
-Please enter the high number: 45
-42 lies between the numbers 40 and 45.
+        expected_output = """This program will ask the user to enter something and then print out a reversed version of the user's input.
+Please enter something: I hope they call me on a Mission!
+Using the for loop: The reverse of 'I hope they call me on a Mission!' is: !noissiM a no em llac yeht epoh I
+Using the while loop: The reverse of 'I hope they call me on a Mission!' is: !noissiM a no em llac yeht epoh I
 Would you like to play again? (Y/N): n"""
 
 # Split the expected and actual outputs into words
