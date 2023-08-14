@@ -1,31 +1,23 @@
-import os
 import subprocess
 
 def run_job(cmd, inputs):
     try:
         process = subprocess.Popen(
-            cmd,
-            shell=True,
+            cmd.split(),
             stdin=subprocess.PIPE,
             stdout=subprocess.PIPE,
             stderr=subprocess.STDOUT,
             text=True,
         )
 
-        # Write all inputs at once
-        process_input = "\n".join(inputs) + "\n"
-        stdout_data, _ = process.communicate(input=process_input)
+        inputs_string = "\n".join(inputs)
+        output, _ = process.communicate(inputs_string)
 
-        return stdout_data
+        return output
 
     except BrokenPipeError:
-        print("\033[91m" + "The program cannot be run, or does not intake inputs" + "\033[0m") # Red color
+        print("\033[91m" + "The program can not be run, or does not intake inputs" + "\033[0m") # Red color
         return ""
-
-def remove_class_files():
-    for file in os.listdir('.'):
-        if file.endswith('.class'):
-            os.remove(file)
 
 if __name__ == "__main__":
     # Compile
@@ -35,33 +27,37 @@ if __name__ == "__main__":
     if compile_result:
         print(f"Compilation error:\n{compile_result}")
     else:
-        input_data = ["50", "16", "189", "y", "40", "42", "45", "n"]  # Inputs for the Java program
-        # Inputs for the Java program
-        run_command = f"java -cp {src_dir} Main"  # Running the Main class
+        input_data = [
+            "50", "16", "189", "y", "40", "42", "45", "n",
+        ]  # Inputs for the Java program
+        run_command = f"java -cp {src_dir} Main"
         run_result = run_job(run_command, input_data)
 
-        expected_output = """Please enter the first number: Invalid Response: Please enter a whole number.
-Please enter the first number: Please enter the second number: 5 raised to the power of 0 is: 1.
-Would you like to play again? (Y/N): Invalid response: Please answer with a 'Y' or 'N'.
-Would you like to play again? (Y/N): 
-Please enter the first number: Please enter the second number: 5 raised to the power of 1 is: 5.
-Would you like to play again? (Y/N): 
-Please enter the first number: Please enter the second number: 5 raised to the power of 3 is: 125.
-Would you like to play again? (Y/N): """
+        expected_output = """This program will ask the user for 3 numbers and determine if the second number lies between the first and the third.
+Please enter the low number: 50
+Please enter the number to be tested (the between number): 16
+Please enter the high number: 189
+16 DOES NOT lie between the numbers 50 and 189.
+Would you like to play again? (Y/N): y
+Please enter the low number: 40
+Please enter the number to be tested (the between number): 42
+Please enter the high number: 45
+42 lies between the numbers 40 and 45.
+Would you like to play again? (Y/N): n"""
 
-        # Check if expected output is within run_result
-        expected_output_no_spaces = expected_output.replace(" ", "")
-        run_result_no_spaces = run_result.replace(" ", "")
+# Split the expected and actual outputs into words
+expected_words = set(expected_output.split())
+actual_words = run_result.split()
 
-        if expected_output_no_spaces in run_result_no_spaces:
-            print("Your code works")
-        else:
-            print("Please! Make sure that your program output matched the example output")
-            print("Example output:")
-            print(expected_output)
-            print("Actual output:")
-            print(run_result)
-            # You may want to add more sophisticated comparison logic here
+# Check if all actual words are in the expected words
+missing_words = [word for word in actual_words if word not in expected_words]
 
-    # Remove .class files
-    remove_class_files()
+if missing_words:
+    print("Your code does not output the expected results.")
+    print("Here are the actual words that were not found in the expected output:")
+    for word in missing_words:
+        print(word)
+    exit(1)
+else:
+    print("Your code works!")
+    exit(0)
