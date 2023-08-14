@@ -14,8 +14,20 @@ The member is a Babe in Arms."""
         return """This program will ask a member's age and gender and determine which class they should attend on Sunday.
 Please enter the member's age:
 The member should be in Nursery."""
-    elif case == 'case3':
-        return 'This is case 3'
+    elif case == "8\n":
+        return """This program will ask a member's age and gender and determine which class they should attend on Sunday.
+Please enter the member's age:
+The member should attend Primary."""
+    elif case == "16\nf\n":
+        return """This program will ask a member's age and gender and determine which class they should attend on Sunday.
+Please enter the member's age:
+Please enter the member's gender:
+The member should attend Young Women's."""
+    elif case == "23\nM\n":
+        return """This program will ask a member's age and gender and determine which class they should attend on Sunday.
+Please enter the member's age:
+Please enter the member's gender:
+The member should attend Priesthood."""
 
 
 def remove_whitespace(strings):
@@ -159,3 +171,9 @@ java_file_path = "Main.java"
 compile_and_run_java(java_file_path,"0\n")
 
 compile_and_run_java(java_file_path,"2\n")
+
+compile_and_run_java(java_file_path,"8\n")
+
+compile_and_run_java(java_file_path,"16\nf\n")
+
+compile_and_run_java(java_file_path,"23\nM\n")
