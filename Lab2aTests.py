@@ -99,16 +99,27 @@ I agree. Elder Holland was great! I'm just glad they didn't make Java against th
 """
     
     stdout_lines = stdout.splitlines()
+    stdout_lines = delete_space_elements(stdout_lines)
+    stdout_lines = remove_whitespace(stdout_lines)
+
     expected_output_lines = expected_output.splitlines()
-    delete_space_elements(stdout_lines)
-    delete_space_elements(expected_output_lines)
+    expected_output_lines = delete_space_elements(expected_output_lines)
+    expected_output_lines = remove_whitespace(expected_output_lines)
 
     testArray = []
 
-    if(delete_space_elements(stdout_lines) == delete_space_elements(expected_output_lines)):
+    if(stdout_lines == expected_output_lines):
         print("Well done!")
         remove_main("Main.class")
     else:
+        print()
+        print("Actual")
+        print()
+        print(stdout)
+        print()
+        print("Expected")
+        print()
+        print(expected_output)
         print()
         print("There might be some mistakes in the typo. Check your actual output and the expected output")
         print()

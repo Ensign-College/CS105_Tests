@@ -89,10 +89,13 @@ The area of the rectangle with a width of 4 and the height of 10 is 40.
 """
 
     stdout_lines = stdout.splitlines()
-    expected_output_lines = expected_output.splitlines()
-    alternative_expected_output = alternative_expected_output.splitlines()
+    stdout_lines = delete_space_elements(stdout_lines)
     stdout_lines = remove_whitespace(stdout_lines)
+
+    expected_output_lines = expected_output.splitlines()
+    expected_output_lines = delete_space_elements(expected_output_lines)
     expected_output_lines = remove_whitespace(expected_output_lines)
+    alternative_expected_output = alternative_expected_output.splitlines()
     alternative_expected_output = remove_whitespace(alternative_expected_output)
 
     testArray = []
@@ -104,8 +107,17 @@ The area of the rectangle with a width of 4 and the height of 10 is 40.
         remove_main("Main.class")
     else:
         print()
+        print("Actual")
+        print()
+        print(stdout)
+        print()
+        print("Expected")
+        print()
+        print(expected_output)
+        print()
         print("There might be some mistakes in the typo. Check your actual output and the expected output")
         print()
+        
         for index, (stdout_lines, expected_output_lines) in enumerate(zip(stdout_lines, expected_output_lines)):
             if stdout_lines != expected_output_lines:
                 result = f"Got '{stdout_lines}', Expected '{expected_output_lines}'"

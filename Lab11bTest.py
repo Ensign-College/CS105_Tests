@@ -103,9 +103,12 @@ Enter a number between 1 and 15 to display the corresponding apostle (or press E
 """
     
     stdout_lines = stdout.splitlines()
+    stdout_lines = delete_space_elements(stdout_lines)
+    stdout_lines = remove_whitespace(stdout_lines)
+
     expected_output_lines = expected_output.splitlines()
-    delete_space_elements(stdout_lines)
-    delete_space_elements(expected_output_lines)
+    expected_output_lines = delete_space_elements(expected_output_lines)
+    expected_output_lines = remove_whitespace(expected_output_lines)
 
     testArray = []
 
@@ -113,6 +116,14 @@ Enter a number between 1 and 15 to display the corresponding apostle (or press E
         print("Well done!")
         remove_main("Main.class")
     else:
+        print()
+        print("Actual")
+        print()
+        print(stdout)
+        print()
+        print("Expected")
+        print()
+        print(expected_output)
         print()
         print("There might be some mistakes in the typo. Check your actual output and the expected output")
         print()
