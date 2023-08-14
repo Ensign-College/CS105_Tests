@@ -35,9 +35,8 @@ if __name__ == "__main__":
     if compile_result:
         print(f"Compilation error:\n{compile_result}")
     else:
-        input_data = [
-            "ok... but when do you want me to enter it?", "5", "0", "Sure!!!", "y", "5", "1", "y", "5", "3", "n"
-        ]  # Inputs for the Java program
+        input_data = ["50", "16", "189", "y", "40", "42", "45", "n"]  # Inputs for the Java program
+        # Inputs for the Java program
         run_command = f"java -cp {src_dir} Main"  # Running the Main class
         run_result = run_job(run_command, input_data)
 
