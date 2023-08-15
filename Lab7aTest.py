@@ -30,7 +30,7 @@ if __name__ == "__main__":
         print(f"Compilation error:\n{compile_result}")
     else:
         input_data = [
-            "Emily", "last year", "2022", "y", "Fred", "2000", "n"
+            "Emily", "last year", "2022", "y", "Fred", "2004", "n"
         ]  # Inputs for the Java program
         run_command = f"java -cp {src_dir} Main"
         run_result = run_job(run_command, input_data)
